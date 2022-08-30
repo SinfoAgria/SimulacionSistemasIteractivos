@@ -36,20 +36,28 @@ struct MyVector2D
             );
     }
 
-    /*public static MyVector2D operator + (MyVector2D a, MyVector2D b)
+    public MyVector2D div(float a)
     {
-        return a.Sum(b);
+        return new MyVector2D(
+            x / a,
+            y / a);
     }
 
-    public static MyVector2D operator - (MyVector2D a, MyVector2D b)
+    /*public static MyVector2D operator +(MyVector2D a, MyVector2D b);
+
+    public static MyVector2D operator -(MyVector2D a, MyVector2D b);
+
+    public static MyVector2D operator *(MyVector2D a, float x);*/
+ 
+    public static MyVector2D operator /(float b, MyVector2D a)
     {
-        return a.Sub(b);
+        return a.div(b);
     }
 
-    public static MyVector2D operator * (MyVector2D a, float x)
+    public static MyVector2D operator /(MyVector2D a, float b)
     {
-        return a.Scale(x);
-    }*/
+        return a.div(b);
+    }
 
     public void Draw(Color color)
     {
