@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MyEsferaWithForces : MonoBehaviour
+public class Water : MonoBehaviour
 {
     private MyVector2D position;
     [SerializeField] private MyVector2D acceleration;
@@ -10,11 +10,12 @@ public class MyEsferaWithForces : MonoBehaviour
     [SerializeField] private float mass = 1f;
 
     [Header("Forces")]
-    [SerializeField] private MyVector2D wind;
+    //[SerializeField] private MyVector2D wind;
     private float gravityNum = -9.8f;
-   
+
     [Range(0f, 1f), SerializeField] private float DampingFactor = 0.9f;
     [Range(0f, 1f), SerializeField] private float frictioncoefficient = 0.9f;
+    [SerializeField] private bool useFluidFriction;
 
     [Header("World")]
     [SerializeField] Camera cam;
@@ -30,11 +31,27 @@ public class MyEsferaWithForces : MonoBehaviour
         float weightScalar = gravityNum * mass;
         MyVector2D weight = new MyVector2D(0, weightScalar);
         MyVector2D friction = new MyVector2D(0, 0);
+        ApplyForce(weight);
 
-        friction = frictioncoefficient * -weightScalar * velocity.normalized * -1;
-
-        ApplyForce(weight + friction);
-        weight.Draw(position, Color.cyan);
+        if (useFluidFriction)
+        {            
+            if(transform.localPosition.y <= 0)
+            {
+                float frontalArea = transform.localScale.x;
+                float rho = 1;
+                float fluidDragCoefficient = 1;
+                float velocityMagnitude = velocity.magnitude;
+                float scalarPart = -0.5f * rho * velocityMagnitude * velocityMagnitude * frontalArea * fluidDragCoefficient;
+                MyVector2D frictionWater = scalarPart * velocity.normalized;
+                ApplyForce(frictionWater);
+            }
+        }
+        else
+        {
+            friction = frictioncoefficient * -weightScalar * velocity.normalized * -1;
+            ApplyForce(weight + friction);
+            weight.Draw(position, Color.cyan);
+        }
 
         //ApplyForce(wind);
 
