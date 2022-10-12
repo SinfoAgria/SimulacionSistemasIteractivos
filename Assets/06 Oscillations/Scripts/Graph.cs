@@ -21,7 +21,7 @@ public class Graph : MonoBehaviour
 
     private void Update()
     {
-        for (int i = 0; i < m_allPoints.Length; i++)
+        /*for (int i = 0; i < m_allPoints.Length; i++)
         {
             float x = i * m_distanceFactor;
             float y = F(x);
@@ -29,6 +29,6 @@ public class Graph : MonoBehaviour
             m_allPoints[i].transform.localPosition = new Vector3(x, y, 0);
         }
 
-        float F(float x) => m_amplitude * Mathf.Sin(x + Time.time);
+        float F(float x) => m_amplitude * Mathf.Sin(x + Time.time);*/
     }
 }
