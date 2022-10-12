@@ -33,10 +33,11 @@ public class Tween : MonoBehaviour
         normalizedTime = currentTime / duration;
         transform.position = Vector3.Lerp(initialPosition, finalPosition, EaseInCubic(normalizedTime));
         spriteRenderer.color = Color.Lerp(initialColor, finalColor, EaseInCubic(normalizedTime));
+        currentTime += Time.deltaTime;
 
-        /*if (normalizedTime >= 1){
+        if (normalizedTime >= 1){
             Debug.Log("Completed");
-        }*/
+        }
 
         if (Input.GetKeyDown(KeyCode.Space)) StartTween();
     }
@@ -50,6 +51,6 @@ public class Tween : MonoBehaviour
 
     private float EaseInCubic(float x)
     {
-        return x * x * x;
+        return x * x;
     }
 }

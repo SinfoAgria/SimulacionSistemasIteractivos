@@ -6,11 +6,11 @@ public class Oscillation : MonoBehaviour
 {
     [SerializeField]private float amplitude = 1;
     [SerializeField] private float factor = 1;
-    Vector3 inicialPosition;
+    //Vector3 inicialPosition;
 
     private void Start()
     {
-        inicialPosition = transform.position;
+        //inicialPosition = transform.position;
     }
 
     private void Update()
